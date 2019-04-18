@@ -36,17 +36,17 @@ public class MemberDAO {
 	// 로그인 처리를 위한 메소드
 	public int verifyIdPassword(int id, String password) {
 		System.out.println("verifyIdPassword(): " + id + "," + password);
-		String query = "select password from member where id=?;";
+		String query = "select hashed from member where id=?;";
 		PreparedStatement pStmt = null;
 		ResultSet rs = null;
-		String dbPassword = "";
+		String hashedPassword = "";
 		try {
 			pStmt = conn.prepareStatement(query);
 			pStmt.setInt(1, id);
 			rs = pStmt.executeQuery();
 			while(rs.next()) {
-				dbPassword = rs.getString(1);
-				if(dbPassword.equals(password))
+				hashedPassword = rs.getString(1);
+				if(BCrypt.checkpw(password, hashedPassword))
 					return ID_PASSWORD_MATCH;
 				else 
 					return PASSWORD_IS_WRONG;
