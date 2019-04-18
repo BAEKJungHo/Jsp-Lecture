@@ -9,14 +9,13 @@
 <body>
 <%
 	//request.setCharacterEncoding("UTF-8"); request.getParameter("error");
-	Object error = request.getAttribute("error");
+	String error = (String)request.getAttribute("error");
 	System.out.println(error);
 	 if(error != null) {
 		out.println("<script>alert('" + error + "')</script>");
 	}
 	
 %>
-
 	<center><br><br>
 	<h3>Member Login</h3><br>
 	<hr>
