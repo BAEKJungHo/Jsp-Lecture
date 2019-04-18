@@ -11,10 +11,11 @@ import java.util.List;
 
 public class MemberDAO {
 	
-	public static final int ID_PASSWORD_MATCH = 1;
-	public static final int ID_DOES_NOT_EXIST = 2;
-	public static final int PASSWORD_IS_WRONG = 3;
-	public static final int DATABASE_ERROR = -1;
+	// 로그인 처리를 위한 상수 선언
+	public static final int ID_PASSWORD_MATCH = 1; // 아이디, 패스워드가 올바르면 1의값
+	public static final int ID_DOES_NOT_EXIST = 2; // 아이디가 존재하지 않으면 2의 값
+	public static final int PASSWORD_IS_WRONG = 3; // 패스워드가 틀리면 3의 값
+	public static final int DATABASE_ERROR = -1; // DB Error 발생 시 -1의 음수값
 	
 	private Connection conn;
 	private static final String USERNAME = "javauser";
@@ -32,6 +33,7 @@ public class MemberDAO {
 		}
 	}
 	
+	// 로그인 처리를 위한 메소드
 	public int verifyIdPassword(int id, String password) {
 		System.out.println("verifyIdPassword(): " + id + "," + password);
 		String query = "select password from member where id=?;";

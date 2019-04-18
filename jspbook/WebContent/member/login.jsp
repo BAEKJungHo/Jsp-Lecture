@@ -8,18 +8,19 @@
 </head>
 <body>
 <%
-	//request.setCharacterEncoding("UTF-8");
-	String error = request.getParameter("error");
+	//request.setCharacterEncoding("UTF-8"); request.getParameter("error");
+	Object error = request.getAttribute("error");
 	System.out.println(error);
-	if(error != null) {
+	 if(error != null) {
 		out.println("<script>alert('" + error + "')</script>");
 	}
 	
 %>
+
 	<center><br><br>
 	<h3>Member Login</h3><br>
 	<hr>
-	<form name = "loginForm" action=/jspbook/member/loginProc.jsp method=post>
+	<form name = "loginForm" action=/jspbook/member/loginProcServlet method=post>
 		<label><span>ID:</span><input type="text" name="id" size="10"></label>
 		<label><span>PASSWORD:</span><input type="password" name="password"	size="10"></label><br><br>
 		<label><span></span><input type="submit" value="로그인" name="B1">&nbsp;&nbsp;</label><br><br>
