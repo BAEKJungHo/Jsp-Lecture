@@ -68,15 +68,16 @@ public class MemberDAO {
 	
 	// INSERT QUERY - 회원가입
 	public void insertMember(MemberDTO member) { 
-		String query = "insert into member values (?, ?, ?, ?, ?);";
+		String query = "insert into member(password, name, birthday, address, hashed) values (?, ?, ?, ?, ?);";
 		PreparedStatement pStmt = null;
 		try {
+			String hashedPassword = BCrypt.hashpw(member.getPassword(), BCrypt.gensalt());
 			pStmt = conn.prepareStatement(query);
-			pStmt.setInt(1, member.getId());
-			pStmt.setString(2, member.getPassword());
-			pStmt.setString(3, member.getName());
-			pStmt.setString(4, member.getBirthday());
-			pStmt.setString(5, member.getAddress());
+			pStmt.setString(1, "*");
+			pStmt.setString(2, member.getName());
+			pStmt.setString(3, member.getBirthday());
+			pStmt.setString(4, member.getAddress());
+			pStmt.setString(5, hashedPassword);
 
 			pStmt.executeUpdate();
 		} catch(Exception e) {
