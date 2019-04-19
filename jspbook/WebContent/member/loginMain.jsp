@@ -19,7 +19,7 @@
 	<h3>회원 명단</h3>
 	<hr>
 	<table border="1" style="border-collapse:collapse;">
-	<tr><th>아이디</th><th>이름</th><th>생년월일</th><th>주소</th><th>액션</th></tr>
+	<tr><th>아이디</th><th>이름</th><th>생년월일</th><th>주소</th><th>수정</th><th>삭제</th></tr>
 	<%
 		for(MemberDTO member : list) {
 	%>
@@ -28,9 +28,11 @@
 		<td><%=member.getBirthday()%></td>
 		<td><%=member.getAddress()%></td>
 		<%
-			String uri = "memberProcServlet?action=update&id=" + member.getId();
+			String updateUri = "memberProcServlet?action=update&id=" + member.getId();
+			String deleteUri = "memberProcServlet?action=delete&id=" + member.getId();
 		%>
-		<td>&nbsp;<button onclick="location='<%=uri%>'">수정</button>&nbsp;</td></tr>
+		<td>&nbsp;<button onclick="location='<%=updateUri%>'">수정</button>&nbsp;</td>
+		<td>&nbsp;<button onclick="location='<%=deleteUri%>'">삭제</button>&nbsp;</td></tr>
 	<%
 		}
 	%>
