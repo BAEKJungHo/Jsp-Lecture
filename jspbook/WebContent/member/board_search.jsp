@@ -15,12 +15,11 @@
 </head>
 <body>
 	<div align=center>
-	<H3>My Simple Bulletin Board!!</H3>
+	<H3>상세조회</H3>
 	<a href="loginMain.jsp">회원 목록으로</a>
-	<button onclick="location='write.html'">게시물 작성</button>
 	<HR>
 	<table border="1" style="border-collapse:collapse;" height=150, width=700>
-	<tr bgcolor="pink"><th>글번호</th><th>제목</th><th>날짜</th><th>내용</th><th>액션</th></tr>
+	<tr bgcolor="pink"><th>아이디</th><th>멤버아이디</th><th>제목</th><th>날짜</th><th>내용</th><th>액션</th></tr>
 	<%
 	for (BbsDTO bb: list) {
 	%>

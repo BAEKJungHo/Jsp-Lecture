@@ -24,26 +24,16 @@ public class BoardProc extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	/*	String uri = request.getRequestURI();
-		String conPath = request.getContextPath();
-		String command = uri.substring(conPath.length());
-		System.out.println("doGet(): " + uri + ", " + conPath + ", " + command);
-	*/	doAction(request, response);
+		doAction(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	/*	String uri = request.getRequestURI();
-		String conPath = request.getContextPath();
-		String command = uri.substring(conPath.length());
-		System.out.println("doPost(): " + uri + ", " + conPath + ", " + command);
-	*/	doAction(request, response);
+		doAction(request, response);
 	}
 	
 	protected void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BbsDAO bDao = new BbsDAO();
 		BbsDTO bbs = null;
-		MemberDAO mDao = null;
-		MemberDTO member = null;
 		RequestDispatcher rd = null;
 		SimpleDateFormat format1 = null;
 		Date time = null;
@@ -61,11 +51,9 @@ public class BoardProc extends HttpServlet {
 		
 		switch(action) {
 		case "update":		// 수정 버튼 클릭 시
-			//bDao = new BbsDAO();
-			// List<BbsDTO> list = bDao.selectAll();
-				for(BbsDTO bb : list) {
-					memId = bb.getMemberId();
-				}
+			for(BbsDTO bb : list) {
+				memId = bb.getMemberId();
+			}
 				
 			if (!request.getParameter("id").equals("")) {
 				id = Integer.parseInt(request.getParameter("id"));
@@ -79,8 +67,7 @@ public class BoardProc extends HttpServlet {
 				rd.forward(request, response);
 				break;
 			}
-			
-			// bDao = new BbsDAO();
+
 			bbs = bDao.selectOne(id);
 			bDao.close();
 			request.setAttribute("bbs", bbs);
@@ -89,11 +76,9 @@ public class BoardProc extends HttpServlet {
 	        break;
 	        
 		case "delete":		// 삭제 버튼 클릭 시
-			//bDao = new BbsDAO();
-			// List<BbsDTO> list = bDao.selectAll();
-				for(BbsDTO bb : list) {
-					memId = bb.getMemberId();
-				}
+			for(BbsDTO bb : list) {
+				memId = bb.getMemberId();
+			}
 			if (!request.getParameter("id").equals("")) {
 				id = Integer.parseInt(request.getParameter("id"));
 			}
@@ -106,7 +91,7 @@ public class BoardProc extends HttpServlet {
 				rd.forward(request, response);
 				break;
 			}
-			//bDao = new BbsDAO();
+	
 			bDao.deleteBbs(id);
 			bDao.close();
 			
@@ -131,7 +116,6 @@ public class BoardProc extends HttpServlet {
 			time1 = format1.format(time);
 		
 			// 글쓰기
-			//bDao = new BbsDAO();
 			bDao.insertBbs(new BbsDTO(id, title, time1, contents));
 			
 			message = "게시물 작성이 완료되었습니다.";
@@ -151,10 +135,9 @@ public class BoardProc extends HttpServlet {
 			
 			format1 = new SimpleDateFormat ("yy-MM-dd HH:mm");
 			time = new Date();
-			time1 = format1.format(time).substring(0, 16);
+			time1 = format1.format(time);
 			
 			bbs = bDao.selectOne(id);
-			
 			bbs.setTitle(title);
 			bbs.setContent(contents);
 			bbs.setDate(time1);
