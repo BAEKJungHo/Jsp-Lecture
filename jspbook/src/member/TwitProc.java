@@ -58,5 +58,4 @@ public class TwitProc extends HttpServlet {
 		// 목록 화면으로 리다이렉팅
 		response.sendRedirect("twitter_list.jsp");
 	}
-
 }

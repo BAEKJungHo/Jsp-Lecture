@@ -123,6 +123,7 @@ public class MemberProc extends HttpServlet {
 				member = mDao.searchById(id);
 				session.setAttribute("memberId", id);
 				session.setAttribute("memberName", member.getName());
+				System.out.println("세션 ID: " + (Integer)session.getAttribute("memberId"));
 				response.sendRedirect("loginMain.jsp");
 			} else {
 				String uri = "login.jsp?error=" + URLEncoder.encode(errorMessage, "UTF-8");

@@ -27,8 +27,8 @@
 	<center>
 	<h3>회원 명단</h3>
 	<%=(String)session.getAttribute("memberName")%> 회원님 반갑습니다.<br>
-	<a href="board_list.jsp">게시판</a>&nbsp;&nbsp;&nbsp;
-	<a href="twitter_list.jsp">트윗</a>&nbsp;&nbsp;&nbsp;
+	<a href="bbsServlet?action=list&page=1">게시판</a>&nbsp;&nbsp;
+	<a href="twitter_list.jsp">트윗</a>&nbsp;&nbsp;
 	<a href="/jspbook/member/memberProcServlet?action=logout">로그아웃</a>
 	<hr>
 	<table border="1" style="border-collapse:collapse;" height=300, width=600>
@@ -44,10 +44,8 @@
 			String updateUri = "memberProcServlet?action=update&id=" + member.getId();
 			String deleteUri = "memberProcServlet?action=delete&id=" + member.getId();
 		%>
-		<td>
-		&nbsp;<button onclick="location.href='<%=updateUri%>'">수정</button>&nbsp;
-		<button onclick="location.href='<%=deleteUri%>'">삭제</button>&nbsp;</td>
-		</tr>
+		<td>&nbsp;<button onclick="location.href='<%=updateUri%>'">수정</button>&nbsp;
+			<button onclick="location.href='<%=deleteUri%>'">삭제</button>&nbsp;</td></tr>
 	<%
 	}
 	%>
