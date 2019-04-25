@@ -95,7 +95,7 @@ public class MemberProc extends HttpServlet {
 			}
 			if (id != (Integer)session.getAttribute("memberId")) {
 				message = "id = " + id + " 에 대한 수정 권한이 없습니다.";
-				url = "memberProcServlet?action=list&page=1";
+				url = "memberProcServlet?action=list&page="+curPage;
 				request.setAttribute("message", message);
 				request.setAttribute("url", url);
 				rd = request.getRequestDispatcher("alertMsg.jsp");
@@ -116,7 +116,7 @@ public class MemberProc extends HttpServlet {
 			}
 			if (id != (Integer)session.getAttribute("memberId")) {
 				message = "id = " + id + " 에 대한 삭제 권한이 없습니다.";
-				url = "memberProcServlet?action=list&page=1";
+				url = "memberProcServlet?action=list&page="+curPage;
 				request.setAttribute("message", message);
 				request.setAttribute("url", url);
 				rd = request.getRequestDispatcher("alertMsg.jsp");
@@ -158,12 +158,12 @@ public class MemberProc extends HttpServlet {
 				session.setAttribute("memberId", id);
 				session.setAttribute("memberName", member.getName());
 				System.out.println("세션 ID: " + (Integer)session.getAttribute("memberId"));
-				url = "memberProcServlet?action=list&page=1";
-				response.sendRedirect(url);
+				response.sendRedirect("memberProcServlet?action=list&page=1");
 			} else {
-				String uri = "login.jsp?error=" + URLEncoder.encode(errorMessage, "UTF-8");
-						//org.apache.jasper.runtime.JspRuntimeLibrary.URLEncode(String.valueOf(errorMessage), request.getCharacterEncoding());
-				response.sendRedirect(uri); 
+				request.setAttribute("message", errorMessage);
+				request.setAttribute("url", "login.jsp");
+				rd = request.getRequestDispatcher("alertMsg.jsp");
+		        rd.forward(request, response);
 			}
 			mDao.close();
 			break;
@@ -189,7 +189,7 @@ public class MemberProc extends HttpServlet {
 			session.setAttribute("memberName", name);
 			
 			message = "귀하의 아이디는 " + member.getId() + " 입니다.";
-			url = "memberProcServlet?action=list&page=1";
+			url = "memberProcServlet?action=list&page="+curPage;
 			request.setAttribute("message", message);
 			request.setAttribute("url", url);
 			rd = request.getRequestDispatcher("alertMsg.jsp");
@@ -213,7 +213,7 @@ public class MemberProc extends HttpServlet {
 			mDao.close();
 			
 			message = "다음과 같이 수정하였습니다.\\n" + member.toString();
-			url = "memberProcServlet?action=list&page=1";
+			url = "memberProcServlet?action=list&page="+curPage;
 			request.setAttribute("message", message);
 			request.setAttribute("url", url);
 			rd = request.getRequestDispatcher("alertMsg.jsp");
