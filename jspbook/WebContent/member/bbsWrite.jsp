@@ -32,4 +32,4 @@
 			<a href="bbsServlet?action=list&page=<%=(int)session.getAttribute("currentBbsPage")%>">목록으로</a></label>
 	</form>
 </body>
-</html>html>
+</html>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,19 +29,13 @@
 	</style>
 </head>
 <body>
-<%
-	//request.setCharacterEncoding("UTF-8");
-	String error = request.getParameter("error");
-	//String error = (String) request.getAttribute("error");
-	if (error != null) {
-		//System.out.println(error);
-		out.println("<script>alert('" + error + "')</script>");
-	}
-%>
+<c:set var="error" value="${param.error}" />
+<c:if test="${error ne null}">
+	<script> alert('${error}') </script>
+</c:if>
 	<center><br>
 	<h3>Member Login</h3><br>
 	<hr>
-	<!-- <form name="loginForm" action=/jspbook/member/loginProcServlet method=post> -->
 	<form name="loginForm" action="/jspbook/member/memberProcServlet?action=login" method=post>
 		<label><span>ID:</span>
 			<input type="text" name="id" size="10"></label>

@@ -182,7 +182,7 @@ public class BbsDAO {
 				bmDto.setId(rs.getInt(1));
 				bmDto.setTitle(rs.getString(2));
 				bmDto.setName(rs.getString(3));
-				bmDto.setDate(rs.getString(4));
+				bmDto.setDate(rs.getString(4).substring(0, 16));
 				bmDto.setContent(rs.getString(5));
 			}
 			rs.close();
