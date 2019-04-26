@@ -8,7 +8,6 @@
 				value="[%d{HH:mm:ss}] [%c{1}.%M()] [%p] %m %n" />
 		</layout>
 	</appender>
-
 	<appender name="dailyout" class="org.apache.log4j.DailyRollingFileAppender">  
         <param name="file" value="f:/Workspace/logs/dailyout.log"/>  
         <param name="Append" value="true"/>  
@@ -24,21 +23,25 @@
 		<param name="MaxFileSize" value="10kb"/>  
 		<param name="MaxBackupIndex" value="1"/> 
 		<layout class="org.apache.log4j.HTMLLayout" /> 
-    </appender>  
-    <logger name="org.apache.jsp.ch14">
+    </appender> 
+     
+<!--     <logger name="org.apache.jsp.ch14">
         <level value="WARN" />
         <appender-ref ref="rolling" />
     </logger>
- 
 	<logger name="jspbook.ch14">
         <level value="TRACE" />
         <appender-ref ref="dailyout" />
-    </logger>
+    </logger> -->
+<!--     <logger name="member">
+        <level value="INFO" />
+        <appender-ref ref="stdout" />
+    </logger> -->
         
     <root>
         <level value="DEBUG" />
         <appender-ref ref="stdout" />
-        <appender-ref ref="dailyout" />
-        <appender-ref ref="rolling" />
+<!--         <appender-ref ref="dailyout" />
+        <appender-ref ref="rolling" /> -->
     </root>
 </log4j:configuration>
