@@ -15,22 +15,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Servlet implementation class TwitProc
  */
 @WebServlet("/member/twitServlet")
 public class TwitProc extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private static final Logger LOG = LoggerFactory.getLogger(FileProc.class);
+	
     public TwitProc() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		LOG.debug("");
 		doPost(request, response);
+		LOG.debug("");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		LOG.debug("");
 		request.setCharacterEncoding("UTF-8");
 		String msg = request.getParameter("msg");
 		HttpSession session = request.getSession();
@@ -39,7 +46,7 @@ public class TwitProc extends HttpServlet {
 		
 		// 메시지 저장을 위해 application 에서 msgs 로 저장된 ArrayList 가지고 옴
 		List<String> msgs = (ArrayList<String>)application.getAttribute("msgs");
-		
+		LOG.trace(msg);
 		// null 인 경우 새로운 ArrayList 객체를 생성
 		if(msgs == null) {
 			msgs = new ArrayList<String>();
@@ -57,5 +64,6 @@ public class TwitProc extends HttpServlet {
 		
 		// 목록 화면으로 리다이렉팅
 		response.sendRedirect("twitter_list.jsp");
+		LOG.debug("");
 	}
 }

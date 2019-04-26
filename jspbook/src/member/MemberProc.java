@@ -13,34 +13,43 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Servlet implementation class MemberProc
  */
 @WebServlet("/member/memberProcServlet")
 public class MemberProc extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final Logger LOG = LoggerFactory.getLogger(MemberDAO.class);
        
     public MemberProc() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		LOG.debug("");
 /*		String uri = request.getRequestURI();
 		String conPath = request.getContextPath();
 		String command = uri.substring(conPath.length());
 		System.out.println("doGet(): " + uri + ", " + conPath + ", " + command);
 */		doAction(request, response);
+		LOG.debug("");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		LOG.debug("");
 /*		String uri = request.getRequestURI();
 		String conPath = request.getContextPath();
 		String command = uri.substring(conPath.length());
 		System.out.println("doPost(): " + uri + ", " + conPath + ", " + command);
 */		doAction(request, response);
+		LOG.debug("");
 	}
 	
 	protected void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		LOG.debug("");
 		MemberDAO mDao = null;
 		MemberDTO member = null;
 		RequestDispatcher rd = null;
@@ -59,9 +68,10 @@ public class MemberProc extends HttpServlet {
 		List<String> pageList = new ArrayList<String>();
 		
 		switch(action) {
-		case "list":
+		case "list": LOG.debug("");
 			if (!request.getParameter("page").equals("")) {
 				curPage = Integer.parseInt(request.getParameter("page"));
+				LOG.trace("");
 			}
 			mDao = new MemberDAO();
 			int count = mDao.getCount();
@@ -78,6 +88,7 @@ public class MemberProc extends HttpServlet {
 			for (int i=1; i<=pageNo; i++) {
 				page = "&nbsp;<a href=memberProcServlet?action=list&page=" + i + ">" + i + "</a>&nbsp;";
 				pageList.add(page);
+				LOG.trace("");
 			}
 			page = "&nbsp;<a href=#>&raquo;</a>";
 			pageList.add(page);
@@ -87,17 +98,20 @@ public class MemberProc extends HttpServlet {
 			request.setAttribute("memberPageList", pageList);
 			rd = request.getRequestDispatcher("loginMain.jsp");
 	        rd.forward(request, response);
+	        LOG.trace("");
 			break;
 		
-		case "update":		// 수정 버튼 클릭 시
+		case "update": LOG.debug("");		// 수정 버튼 클릭 시
 			if (!request.getParameter("id").equals("")) {
 				id = Integer.parseInt(request.getParameter("id"));
+				LOG.trace("");
 			}
 			if (id != (Integer)session.getAttribute("memberId")) {
 				message = "id = " + id + " 에 대한 수정 권한이 없습니다.";
 				url = "memberProcServlet?action=list&page="+curPage;
 				request.setAttribute("message", message);
 				request.setAttribute("url", url);
+				LOG.trace(url);
 				rd = request.getRequestDispatcher("alertMsg.jsp");
 				rd.forward(request, response);
 				break;
@@ -108,11 +122,13 @@ public class MemberProc extends HttpServlet {
 			request.setAttribute("member", member);
 			rd = request.getRequestDispatcher("update.jsp");
 	        rd.forward(request, response);
+	        LOG.trace("");
 	        break;
 	        
-		case "delete":		// 삭제 버튼 클릭 시
+		case "delete": LOG.debug("");		// 삭제 버튼 클릭 시
 			if (!request.getParameter("id").equals("")) {
 				id = Integer.parseInt(request.getParameter("id"));
+				LOG.trace("");
 			}
 			if (id != (Integer)session.getAttribute("memberId")) {
 				message = "id = " + id + " 에 대한 삭제 권한이 없습니다.";
@@ -121,6 +137,7 @@ public class MemberProc extends HttpServlet {
 				request.setAttribute("url", url);
 				rd = request.getRequestDispatcher("alertMsg.jsp");
 				rd.forward(request, response);
+				LOG.trace(url);
 				break;
 			}
 			mDao = new MemberDAO();
@@ -133,8 +150,9 @@ public class MemberProc extends HttpServlet {
 			request.setAttribute("url", url);
 			rd = request.getRequestDispatcher("alertMsg.jsp");
 			rd.forward(request, response);
+			LOG.trace(url);
 			
-		case "login":		// login 할 때
+		case "login": LOG.debug("");		// login 할 때
 			if (!request.getParameter("id").equals("")) {
 				id = Integer.parseInt(request.getParameter("id"));
 			}
@@ -159,22 +177,25 @@ public class MemberProc extends HttpServlet {
 				session.setAttribute("memberName", member.getName());
 				System.out.println("세션 ID: " + (Integer)session.getAttribute("memberId"));
 				response.sendRedirect("memberProcServlet?action=list&page=1");
+				LOG.trace("");
 			} else {
 				request.setAttribute("message", errorMessage);
 				request.setAttribute("url", "login.jsp");
 				rd = request.getRequestDispatcher("alertMsg.jsp");
 		        rd.forward(request, response);
+		        LOG.trace("");
 			}
 			mDao.close();
 			break;
 		
-		case "logout":			// 로그아웃할 때
+		case "logout": LOG.debug("");			// 로그아웃할 때
 			session.removeAttribute("memberId");
 			session.removeAttribute("memberName");
 			response.sendRedirect("login.jsp");
+			LOG.trace("");
 			break;
 			
-		case "register":		// 회원 등록할 때
+		case "register": LOG.debug("");		// 회원 등록할 때
 			password = request.getParameter("password");
 			name = request.getParameter("name");
 			birthday = request.getParameter("birthday");
@@ -194,10 +215,11 @@ public class MemberProc extends HttpServlet {
 			request.setAttribute("url", url);
 			rd = request.getRequestDispatcher("alertMsg.jsp");
 			rd.forward(request, response);
+			LOG.trace("");
 			mDao.close();
 			break;
 			
-		case "execute":			// 회원 수정정보 입력 후 실행할 때
+		case "execute": LOG.debug("");			// 회원 수정정보 입력 후 실행할 때
 			if (!request.getParameter("id").equals("")) {
 				id = Integer.parseInt(request.getParameter("id"));
 			}
@@ -218,10 +240,12 @@ public class MemberProc extends HttpServlet {
 			request.setAttribute("url", url);
 			rd = request.getRequestDispatcher("alertMsg.jsp");
 	        rd.forward(request, response);
+	        LOG.trace("");
 			//response.sendRedirect("loginMain.jsp");
 			break;
 			
 		default:
 		}
+		LOG.debug("");
 	}
 }

@@ -25,6 +25,7 @@
 	${memberName} 회원님 반갑습니다.<br>
 	<a href="bbsServlet?action=list&page=1">게시판</a>&nbsp;&nbsp;
 	<a href="twitter_list.jsp">트윗</a>&nbsp;&nbsp;
+	<a href="fileServlet?action=member">다운로드</a>&nbsp;&nbsp;
 	<a href="memberProcServlet?action=logout">로그아웃</a>
 	<hr>
 	<table border="1" style="border-collapse:collapse;" width=700>

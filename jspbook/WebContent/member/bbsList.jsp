@@ -24,6 +24,7 @@
 	${memberName} 회원님 반갑습니다.<br>
 	<a href="bbsWrite.jsp">글쓰기</a>&nbsp;&nbsp;
 	<a href="twitter_list.jsp">트윗</a>&nbsp;&nbsp;
+	<a href="fileServlet?action=bbs">다운로드</a>&nbsp;&nbsp;
 	<a href="loginMain.jsp">회원목록</a>&nbsp;&nbsp;
 	<a href="memberProcServlet?action=logout">로그아웃</a>
 	<hr>
