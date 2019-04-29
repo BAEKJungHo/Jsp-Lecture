@@ -13,18 +13,17 @@ import org.slf4j.LoggerFactory;
 
 /**
  * File : DBManager.java
- * Desc : µ¥ÀÌÅÍº£ÀÌ½º ¿¬°á Ã³¸® Å¬·¡½º
- * @author È²ÈñÁ¤(dinfree@dinfree.com)
+ * Desc : ë°ì´í„°ë² ì´ìŠ¤ ì—°ê²° ì²˜ë¦¬ í´ë˜ìŠ¤
  * 
  */
 public class DBManager {
 	private static final Logger LOG = LoggerFactory.getLogger(DBManager.class);
-	// µ¥ÀÌÅÍº£ÀÌ½º °ü·Ã °´Ã¼ ¼±¾ğ
+	// ë°ì´í„°ë² ì´ìŠ¤ ê´€ë ¨ ê°ì²´ ì„ ì–¸
 	Statement stmt = null;
 	PreparedStatement pstmt = null;
 	
 	/**
-	 * JNDI ¸¦ ÀÌ¿ëÇØ Connection °´Ã¼ ¸®ÅÏ
+	 * JNDIë¥¼ ì´ìš©í•´ Connection ê°ì²´ ë¦¬í„´
 	 * @return
 	 */
 	public static Connection getConnection() {
