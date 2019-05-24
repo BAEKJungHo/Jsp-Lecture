@@ -47,7 +47,7 @@ return true;
 					<p><h2>회원가입</h2></p>
 					<p><h5>이젠 쇼핑몰에 로그인하기 위해 회원가입을 해주세요.</h5></p>
 				</div><br>
-				<form action="../control/customerControl.jsp?action=register" class="form-horizontal" 
+				<form action="/FulfillmentService/control/loginRegisterServlet?action=register" class="form-horizontal" 
 										method="POST" onSubmit="return isValidForm();">
 					<div class="form-group">
 						<label class="col-md-4 control-label">이름</label>
