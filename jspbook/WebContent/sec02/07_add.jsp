@@ -7,10 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="/AddtionServlet">
-숫자 : <input type="text" name="num1"><br>
-숫자 : <input type="text" name="num2"><br>
-<input type="submit" value="제출" name="W1">
-</form>
+${num1} + ${num2} = ${add}
 </body>
 </html>

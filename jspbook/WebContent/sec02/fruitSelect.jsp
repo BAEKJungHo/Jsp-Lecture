@@ -7,10 +7,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="/AddtionServlet">
-숫자 : <input type="text" name="num1"><br>
-숫자 : <input type="text" name="num2"><br>
-<input type="submit" value="제출" name="W1">
-</form>
+	<form action="fruit.jsp">
+		<label for="fruit">과일을 선택하세요</label><br>
+		<select id="fruit" name="fruit">
+			<option value="1">사과</option>
+			<option value="2">포도</option>
+			<option value="3">메론</option>
+		</select>
+		<input type="submit" value="전송">
+	</form>
 </body>
 </html>

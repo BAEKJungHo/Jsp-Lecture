@@ -7,10 +7,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="/AddtionServlet">
-숫자 : <input type="text" name="num1"><br>
-숫자 : <input type="text" name="num2"><br>
-<input type="submit" value="제출" name="W1">
+<form action="color.jsp">
+<label for="color">색상을 선택하세요.</label><br>
+<select id="color" name="color">
+<option value="1">빨강</option>
+<option value="2">파랑</option>
+<option value="3">초록</option>
+</select>
+<input type="submit" value="전송">
 </form>
 </body>
 </html>
